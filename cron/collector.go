@@ -44,16 +44,13 @@ func (my *MysqlIns) FetchData() (err error) {
 		return
 	}
 
-	// cfg tag overwrite hostname
-	if strings.Contains(my.tag, "hostname") || strings.Contains(my.tag, "endpoint") {
+	// cfg tag endpoint overwrite hostname
+	if strings.Contains(my.tag, "endpoint") {
 		tags := strings.Split(my.tag, ",")
 		tagm := map[string]string{}
 		for _, t := range tags {
 			ts := strings.Split(t, "=")
 			tagm[ts[0]] = ts[1]
-		}
-		if len(tagm["hostname"]) > 0 {
-			hostname = tagm["hostname"]
 		}
 		if len(tagm["endpoint"]) > 0 {
 			hostname = tagm["endpoint"]
